@@ -31,12 +31,12 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/android/
+/android/app/google-services.json
 /macos/
-/ios/
-/linux/
-/web/
-/test/
+# /ios/
+# /linux/
+# /web/
+# /test/
 /lib/firebase_options.dart
 
 

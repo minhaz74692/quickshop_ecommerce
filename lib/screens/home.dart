@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:e_commerce_app/models/products_model.dart';
+import 'package:e_commerce_app/screens/product_details.dart';
+import 'package:e_commerce_app/utils/nextscreen.dart';
 import 'package:e_commerce_app/utils/products_list.dart';
 import 'package:e_commerce_app/widgets/top_titles.dart';
 import 'package:flutter/material.dart';
@@ -103,25 +105,25 @@ class Homepage extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
-              Padding(
-                // height: 200,
-                padding: const EdgeInsets.all(12.0),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: ProductList().products.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.7,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    ProductsModel singleProduct = ProductList().products[index];
-                    // return Text(singleProduct.name);
-                    return Container(
+              GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: ProductList().products.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.7,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  ProductsModel singleProduct = ProductList().products[index];
+                  // return Text(singleProduct.name);
+                  return Container(
+                    padding: EdgeInsets.all(10),
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
                       ),
                       child: Column(
@@ -173,7 +175,13 @@ class Homepage extends StatelessWidget {
                                     color: Colors.blue,
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  nextScreen(
+                                      context,
+                                      ProductDetails(
+                                          id: singleProduct.id,
+                                          product: singleProduct));
+                                },
                                 child: Text(
                                   'Buy',
                                   style: TextStyle(
@@ -186,10 +194,10 @@ class Homepage extends StatelessWidget {
                           ),
                         ],
                       ),
-                    );
-                  },
-                ),
-              )
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -215,3 +223,220 @@ Map<String, dynamic> imageMapList = {
   'Books':
       'https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg',
 };
+
+
+// Row(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Expanded(
+//                     child: GridView.builder(
+//                       physics: NeverScrollableScrollPhysics(),
+//                       shrinkWrap: true,
+//                       scrollDirection: Axis.vertical,
+//                       itemCount: ProductList().products.length,
+//                       // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                       //   crossAxisCount: 2,
+//                       //   crossAxisSpacing: 15,
+//                       //   mainAxisSpacing: 10,
+//                       //   childAspectRatio: 0.7,
+//                       // ),
+//                       itemBuilder: (BuildContext context, int index) {
+//                         ProductsModel singleProduct =
+//                             ProductList().products[index];
+//                         // return Text(singleProduct.name);
+//                         return Column(
+//                           children: [
+//                             if (index.isEven)
+//                               Container(
+//                                 padding: EdgeInsets.all(10),
+//                                 width: MediaQuery.of(context).size.width / 2,
+//                                 child: Container(
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.circular(10),
+//                                     color: Colors.white,
+//                                   ),
+//                                   child: Column(
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.start,
+//                                     children: [
+//                                       Center(
+//                                         child: Image.network(
+//                                           singleProduct.image,
+//                                           width: 80,
+//                                           height: 80,
+//                                         ),
+//                                       ),
+//                                       Container(
+//                                         margin: EdgeInsets.only(top: 5),
+//                                         padding:
+//                                             EdgeInsets.symmetric(horizontal: 8),
+//                                         child: Text(
+//                                           singleProduct.description.length > 20
+//                                               ? '${singleProduct.description.substring(0, 30)}...'
+//                                               : singleProduct.description,
+//                                           style: TextStyle(
+//                                             fontSize: 16,
+//                                             fontWeight: FontWeight.w600,
+//                                           ),
+//                                         ),
+//                                       ),
+//                                       SizedBox(
+//                                         height: 10,
+//                                       ),
+//                                       Padding(
+//                                         padding: EdgeInsets.symmetric(
+//                                             horizontal: 8.0),
+//                                         child: Text(
+//                                           'Price: \u{09F3}${singleProduct.price} ',
+//                                           style: TextStyle(
+//                                               fontSize: 18,
+//                                               fontWeight: FontWeight.w500,
+//                                               color: Colors.red),
+//                                         ),
+//                                       ),
+//                                       SizedBox(
+//                                         height: 10,
+//                                       ),
+//                                       Center(
+//                                         child: SizedBox(
+//                                           height: 40,
+//                                           width: 100,
+//                                           child: OutlinedButton(
+//                                             style: OutlinedButton.styleFrom(
+//                                               side: BorderSide(
+//                                                 color: Colors.blue,
+//                                               ),
+//                                             ),
+//                                             onPressed: () {
+//                                               nextScreen(
+//                                                   context,
+//                                                   ProductDetails(
+//                                                       id: singleProduct.id,
+//                                                       product: singleProduct));
+//                                             },
+//                                             child: Text(
+//                                               'Buy',
+//                                               style: TextStyle(
+//                                                   fontSize: 18,
+//                                                   fontWeight: FontWeight.bold,
+//                                                   color: Colors.blue),
+//                                             ),
+//                                           ),
+//                                         ),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+//                           ],
+//                         );
+//                       },
+//                     ),
+//                   ),
+//                   Expanded(
+//                     child: ListView.builder(
+//                       physics: NeverScrollableScrollPhysics(),
+//                       shrinkWrap: true,
+//                       scrollDirection: Axis.vertical,
+//                       itemCount: ProductList().products.length,
+//                       // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                       //   crossAxisCount: 2,
+//                       //   crossAxisSpacing: 15,
+//                       //   mainAxisSpacing: 10,
+//                       //   childAspectRatio: 0.7,
+//                       // ),
+//                       itemBuilder: (BuildContext context, int index) {
+//                         ProductsModel singleProduct =
+//                             ProductList().products[index];
+//                         // return Text(singleProduct.name);
+//                         return Column(
+//                           children: [
+//                             if (index.isOdd)
+                              // Container(
+                              //   padding: EdgeInsets.all(10),
+                              //   width: MediaQuery.of(context).size.width / 2,
+                              //   child: Container(
+                              //     decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(10),
+                              //       color: Colors.white,
+                              //     ),
+                              //     child: Column(
+                              //       crossAxisAlignment:
+                              //           CrossAxisAlignment.start,
+                              //       children: [
+                              //         Center(
+                              //           child: Image.network(
+                              //             singleProduct.image,
+                              //             width: 80,
+                              //             height: 80,
+                              //           ),
+                              //         ),
+                              //         Container(
+                              //           margin: EdgeInsets.only(top: 5),
+                              //           padding:
+                              //               EdgeInsets.symmetric(horizontal: 8),
+                              //           child: Text(
+                              //             singleProduct.description.length > 20
+                              //                 ? '${singleProduct.description.substring(0, 30)}...'
+                              //                 : singleProduct.description,
+                              //             style: TextStyle(
+                              //               fontSize: 16,
+                              //               fontWeight: FontWeight.w600,
+                              //             ),
+                              //           ),
+                              //         ),
+                              //         SizedBox(
+                              //           height: 10,
+                              //         ),
+                              //         Padding(
+                              //           padding: EdgeInsets.symmetric(
+                              //               horizontal: 8.0),
+                              //           child: Text(
+                              //             'Price: \u{09F3}${singleProduct.price} ',
+                              //             style: TextStyle(
+                              //                 fontSize: 18,
+                              //                 fontWeight: FontWeight.w500,
+                              //                 color: Colors.red),
+                              //           ),
+                              //         ),
+                              //         SizedBox(
+                              //           height: 10,
+                              //         ),
+                              //         Center(
+                              //           child: SizedBox(
+                              //             height: 40,
+                              //             width: 100,
+                              //             child: OutlinedButton(
+                              //               style: OutlinedButton.styleFrom(
+                              //                 side: BorderSide(
+                              //                   color: Colors.blue,
+                              //                 ),
+                              //               ),
+                              //               onPressed: () {
+                              //                 nextScreen(
+                              //                     context,
+                              //                     ProductDetails(
+                              //                         id: singleProduct.id,
+                              //                         product: singleProduct));
+                              //               },
+                              //               child: Text(
+                              //                 'Buy',
+                              //                 style: TextStyle(
+                              //                     fontSize: 18,
+                              //                     fontWeight: FontWeight.bold,
+                              //                     color: Colors.blue),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
+              //             ],
+              //           );
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // )

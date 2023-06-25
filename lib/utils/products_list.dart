@@ -26,7 +26,7 @@ class ProductList {
     ),
     ProductsModel(
       name: 'mi Power Bank',
-      id: '2',
+      id: '3',
       image: 'https://m.media-amazon.com/images/I/71lVwl3q-kL._SX679_.jpg',
       description:
           'MI Power Bank 3i 20000mAh Lithium Polymer 18W Fast Power Delivery Charging | Input- Type C | Micro USB| Triple Output | Sandstone Black',
@@ -37,7 +37,7 @@ class ProductList {
     ),
     ProductsModel(
       name: 'mi Power Bank',
-      id: '2',
+      id: '4',
       image: 'https://m.media-amazon.com/images/I/71lVwl3q-kL._SX679_.jpg',
       description:
           'MI Power Bank 3i 20000mAh Lithium Polymer 18W Fast Power Delivery Charging | Input- Type C | Micro USB| Triple Output | Sandstone Black',
@@ -48,7 +48,7 @@ class ProductList {
     ),
     ProductsModel(
       name: 'mi Power Bank',
-      id: '2',
+      id: '5',
       image: 'https://m.media-amazon.com/images/I/71lVwl3q-kL._SX679_.jpg',
       description:
           'MI Power Bank 3i 20000mAh Lithium Polymer 18W Fast Power Delivery Charging | Input- Type C | Micro USB| Triple Output | Sandstone Black',
