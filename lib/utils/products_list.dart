@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/models/products_model.dart';
+import 'package:quickshop_ecommerce/models/products_model.dart';
 
 class ProductList {
   List<ProductsModel> products = [

@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:e_commerce_app/constants/asset_image.dart';
-import 'package:e_commerce_app/screens/Welcome_page.dart';
-import 'package:e_commerce_app/utils/nextscreen.dart';
+import 'package:quickshop_ecommerce/constants/asset_image.dart';
+import 'package:quickshop_ecommerce/screens/Welcome_page.dart';
+import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {

@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:e_commerce_app/constants/asset_image.dart';
-import 'package:e_commerce_app/screens/login.dart';
-import 'package:e_commerce_app/screens/signup.dart';
-import 'package:e_commerce_app/utils/nextscreen.dart';
-import 'package:e_commerce_app/widgets/primary_button.dart';
-import 'package:e_commerce_app/widgets/top_titles.dart';
+import 'package:quickshop_ecommerce/constants/asset_image.dart';
+import 'package:quickshop_ecommerce/screens/login.dart';
+import 'package:quickshop_ecommerce/screens/signup.dart';
+import 'package:quickshop_ecommerce/utils/nextscreen.dart';
+import 'package:quickshop_ecommerce/widgets/primary_button.dart';
+import 'package:quickshop_ecommerce/widgets/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

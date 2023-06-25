@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
-import 'package:e_commerce_app/constants/constants.dart';
-import 'package:e_commerce_app/firebase_helper/auth.dart';
-import 'package:e_commerce_app/screens/home.dart';
-import 'package:e_commerce_app/screens/signup.dart';
-import 'package:e_commerce_app/utils/nextscreen.dart';
-import 'package:e_commerce_app/widgets/primary_button.dart';
-import 'package:e_commerce_app/widgets/top_titles.dart';
+import 'package:quickshop_ecommerce/constants/constants.dart';
+import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
+import 'package:quickshop_ecommerce/screens/home.dart';
+import 'package:quickshop_ecommerce/screens/signup.dart';
+import 'package:quickshop_ecommerce/utils/nextscreen.dart';
+import 'package:quickshop_ecommerce/widgets/primary_button.dart';
+import 'package:quickshop_ecommerce/widgets/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

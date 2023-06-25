@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
-import 'package:e_commerce_app/constants/constants.dart';
+import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:e_commerce_app/firebase_helper/auth.dart';
-import 'package:e_commerce_app/screens/home.dart';
-import 'package:e_commerce_app/screens/splash.dart';
-import 'package:e_commerce_app/constants/theme.dart';
+import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
+import 'package:quickshop_ecommerce/screens/home.dart';
+import 'package:quickshop_ecommerce/screens/splash.dart';
+import 'package:quickshop_ecommerce/screens/welcome_page.dart';
+import 'package:quickshop_ecommerce/constants/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
             // TODO: return Homepage();
             return Homepage();
           } else {
-            return Homepage();
+            return WelcomePage();
           }
         },
       ),

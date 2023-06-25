@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:e_commerce_app/models/products_model.dart';
-import 'package:e_commerce_app/screens/product_details.dart';
-import 'package:e_commerce_app/utils/nextscreen.dart';
-import 'package:e_commerce_app/utils/products_list.dart';
-import 'package:e_commerce_app/widgets/top_titles.dart';
+import 'package:quickshop_ecommerce/models/products_model.dart';
+import 'package:quickshop_ecommerce/screens/product_details.dart';
+import 'package:quickshop_ecommerce/utils/nextscreen.dart';
+import 'package:quickshop_ecommerce/utils/products_list.dart';
+import 'package:quickshop_ecommerce/widgets/top_titles.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatelessWidget {
