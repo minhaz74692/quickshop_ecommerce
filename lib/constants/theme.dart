@@ -20,6 +20,13 @@ ThemeData themeData = ThemeData(
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
   ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.white,
+    elevation: 0.0,
+    iconTheme: IconThemeData(
+      color: Colors.black,
+    ),
+  ),
 );
 
 OutlineInputBorder outlineInputBorder = OutlineInputBorder(

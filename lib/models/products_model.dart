@@ -28,11 +28,12 @@ class ProductsModel {
   factory ProductsModel.fromJson(Map<String, dynamic> json) => ProductsModel(
         name: json['name'],
         id: json['id'],
-        description: json['description'],
-        image: json['image'],
-        isfavourite: json['isfavourite'],
+        description: json['description'] ?? json['name'],
+        image: json['image'] ??
+            'https://upload.wikimedia.org/wikipedia/commons/a/a7/Blank_image.jpg',
+        isfavourite: json['isfavourite'] ?? true,
         price: double.parse(json['price'].toString()),
-        status: json['status'],
+        status: json['status'] ?? '',
         // category: json['category'],
       );
   Map<String, dynamic> toJson() => {

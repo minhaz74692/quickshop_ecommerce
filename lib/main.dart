@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/services.dart';
 import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
 import 'package:quickshop_ecommerce/screens/home.dart';
 import 'package:quickshop_ecommerce/screens/splash.dart';
@@ -14,6 +15,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.white, // Replace with your desired color
+    ),
+  );
   runApp(const MyApp());
 }
 
@@ -27,7 +33,7 @@ class MyApp extends StatelessWidget {
       title: 'E-Commerce App',
       theme: themeData,
       home: StreamBuilder(
-        stream: FirebaseAuthHelper.instatnce.getAuthChange,
+        stream: FirebaseAuthHelper.instance.getAuthChange,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             // TODO: return Homepage();

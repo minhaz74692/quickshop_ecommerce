@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseAuthHelper {
-  static FirebaseAuthHelper instatnce = FirebaseAuthHelper();
+  static FirebaseAuthHelper instance = FirebaseAuthHelper();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Stream<User?> get getAuthChange => _auth.authStateChanges();
 
@@ -35,5 +35,9 @@ class FirebaseAuthHelper {
       print(e.code.toString());
       return false;
     }
+  }
+
+  Future signOut() async {
+    await _auth.signOut();
   }
 }

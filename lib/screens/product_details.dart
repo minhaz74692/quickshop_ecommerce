@@ -9,7 +9,11 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
+        ],
+      ),
       body: Center(
         child: Text(product!.name),
       ),

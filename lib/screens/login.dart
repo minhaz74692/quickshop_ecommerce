@@ -94,10 +94,10 @@ class _LogInState extends State<LogIn> {
                   onPressed: () async {
                     bool valid = loginValidation(email.text, password.text);
                     if (valid) {
-                      bool isLogin = await FirebaseAuthHelper.instatnce
+                      bool isLogin = await FirebaseAuthHelper.instance
                           .login(email.text, password.text, context);
                       if (isLogin) {
-                        nextScreen(context, Homepage());
+                        nextScreenCloseOthers(context, Homepage());
                       } else {
                         showMessage('Invalid Email or Password');
                         Navigator.pop(context);

@@ -116,10 +116,10 @@ class _SignUpState extends State<SignUp> {
                     bool isValid = signUpValidation(
                         email.text, password.text, name.text, phone.text);
                     if (isValid) {
-                      bool isSignUp = await FirebaseAuthHelper.instatnce
+                      bool isSignUp = await FirebaseAuthHelper.instance
                           .signUp(email.text, password.text, context);
                       if (isSignUp) {
-                        nextScreen(context, Homepage());
+                        nextScreenCloseOthers(context, Homepage());
                       } else {
                         showMessage('Email or Password is invalid');
                         Navigator.pop(context);
