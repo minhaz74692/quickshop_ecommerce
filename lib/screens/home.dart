@@ -8,6 +8,7 @@ import 'package:quickshop_ecommerce/screens/Welcome_page.dart';
 import 'package:quickshop_ecommerce/screens/product_details.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 import 'package:quickshop_ecommerce/utils/products_list.dart';
+import 'package:quickshop_ecommerce/widgets/drawer.dart';
 import 'package:quickshop_ecommerce/widgets/top_titles.dart';
 import 'package:flutter/material.dart';
 
@@ -41,10 +42,14 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: DrawerMenu(),
+        key: scaffoldKey,
         backgroundColor: Color.fromARGB(255, 250, 250, 255),
         body: isLoading
             ? Center(
@@ -66,6 +71,11 @@ class _HomepageState extends State<Homepage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          IconButton(
+                              onPressed: () {
+                                scaffoldKey.currentState!.openDrawer();
+                              },
+                              icon: Icon(Icons.menu)),
                           Text(
                             'QuickShop',
                             style: TextStyle(
