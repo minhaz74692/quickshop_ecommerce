@@ -2,7 +2,7 @@
 
 import 'package:flutter/services.dart';
 import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
-import 'package:quickshop_ecommerce/screens/home.dart';
+import 'package:quickshop_ecommerce/screens/home_page.dart';
 import 'package:quickshop_ecommerce/screens/splash.dart';
 import 'package:quickshop_ecommerce/screens/welcome_page.dart';
 import 'package:quickshop_ecommerce/constants/theme.dart';
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             // TODO: return Homepage();
-            return Homepage();
+            return HomePage();
           } else {
             return WelcomePage();
           }

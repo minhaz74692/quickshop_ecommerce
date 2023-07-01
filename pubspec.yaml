@@ -21,6 +21,7 @@ dependencies:
   cloud_firestore: ^4.8.1
   firebase_storage: ^11.2.3
   fluttertoast: ^8.2.2
+  persistent_bottom_nav_bar: ^5.0.2
 
 dev_dependencies:
   flutter_test:

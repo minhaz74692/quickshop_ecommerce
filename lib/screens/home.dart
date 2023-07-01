@@ -12,14 +12,14 @@ import 'package:quickshop_ecommerce/widgets/drawer.dart';
 import 'package:quickshop_ecommerce/widgets/top_titles.dart';
 import 'package:flutter/material.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class HomeTab extends StatefulWidget {
+  const HomeTab({super.key});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<HomeTab> createState() => _HomeTabState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomeTabState extends State<HomeTab> {
   List<CategoryModel> categoriesList = [];
   List<ProductsModel> productList = [];
   bool isLoading = false;

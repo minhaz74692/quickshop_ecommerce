@@ -97,7 +97,7 @@ class _LogInState extends State<LogIn> {
                       bool isLogin = await FirebaseAuthHelper.instance
                           .login(email.text, password.text, context);
                       if (isLogin) {
-                        nextScreenCloseOthers(context, Homepage());
+                        nextScreenCloseOthers(context, HomeTab());
                       } else {
                         showMessage('Invalid Email or Password');
                         Navigator.pop(context);
