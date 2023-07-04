@@ -7,7 +7,7 @@ ThemeData themeData = ThemeData(
   primaryColor: Colors.blue,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.red,
       disabledBackgroundColor: Colors.green,
     ),
   ),
@@ -27,6 +27,7 @@ ThemeData themeData = ThemeData(
       color: Colors.black,
     ),
   ),
+  primarySwatch: Colors.red,
 );
 
 OutlineInputBorder outlineInputBorder = OutlineInputBorder(

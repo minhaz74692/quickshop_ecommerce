@@ -15,7 +15,7 @@ class DrawerMenu extends StatelessWidget {
         child: ElevatedButton(
           child: Text('NavBar'),
           onPressed: () {
-            nextScreen(context, HomePage());
+            Navigator.pop(context);
           },
         ),
       ),

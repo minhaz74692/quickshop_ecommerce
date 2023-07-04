@@ -2,8 +2,8 @@
 
 import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
-import 'package:quickshop_ecommerce/screens/home.dart';
 import 'package:quickshop_ecommerce/screens/signup.dart';
+import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 import 'package:quickshop_ecommerce/widgets/primary_button.dart';
 import 'package:quickshop_ecommerce/widgets/top_titles.dart';
