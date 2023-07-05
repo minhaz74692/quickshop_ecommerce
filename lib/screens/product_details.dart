@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:provider/provider.dart';
+import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
 import 'package:flutter/material.dart';
+import 'package:quickshop_ecommerce/screens/cart.dart';
+import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.id, required this.product});
@@ -13,17 +17,38 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  int prouctCount = 0;
   @override
   Widget build(BuildContext context) {
+    int count = Provider.of<ProductBloc>(context).count;
+
+    List<ProductsModel> productListInCart =
+        Provider.of<ProductBloc>(context).productListOfCart;
+    List<ProductsModel> thisProductList = productListInCart
+        .where((product) => product.id == widget.product!.id)
+        .toList();
+
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
+          IconButton(
+              onPressed: () {
+                nextScreen(context, Cart());
+              },
+              icon: Icon(Icons.shopping_cart)),
+          Text(
+            productListInCart.length == 0
+                ? ''
+                : productListInCart.length.toString(),
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
-      body: Center(
-        child: Padding(
+      body: SingleChildScrollView(
+        child: Container(
           padding: const EdgeInsets.all(12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,16 +96,23 @@ class _ProductDetailsState extends State<ProductDetails> {
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: Text(widget.product!.description),
               ),
+
               Row(
                 children: [
                   CircleAvatar(
                     child: IconButton(
                       icon: Icon(Icons.remove),
                       onPressed: () {
-                        if (prouctCount > 0) {
-                          setState(() {
-                            prouctCount--;
-                          });
+                        if (thisProductList.isNotEmpty) {
+                          // setState(() {
+                          //   prouctCount--;
+                          // });
+                          // Provider.of<ProductBloc>(context, listen: false)
+                          //     .decrement();
+                          // Provider.of<ProductBloc>(context, listen: false)
+                          //     .addPrice(widget.product!.price.toInt());
+                          Provider.of<ProductBloc>(context, listen: false)
+                              .addProductToCart(widget.product!);
                         }
                       },
                     ),
@@ -88,24 +120,46 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      prouctCount.toString(),
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      thisProductList.length.toString(),
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      thisProductList.isEmpty
+                          ? '0'
+                          : {thisProductList.length * thisProductList[0].price}
+                              .toString(),
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   CircleAvatar(
                     child: IconButton(
                       icon: Icon(Icons.add),
                       onPressed: () {
-                        setState(() {
-                          prouctCount++;
-                        });
+                        // setState(() {
+                        //   prouctCount++;
+                        // });
+                        // Provider.of<ProductBloc>(context, listen: false)
+                        //     .increment();
+                        // Provider.of<ProductBloc>(context, listen: false)
+                        //     .addPrice(widget.product!.price.toInt());
+                        Provider.of<ProductBloc>(context, listen: false)
+                            .addProductToCart(widget.product!);
                       },
                     ),
                   ),
                 ],
               ),
-              Spacer(),
+              SizedBox(height: 20),
+              // Spacer(), If I add this spacer inside a ScrollView then error will occur...
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -122,7 +176,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     height: 38,
                     width: 140,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        nextScreen(context, Cart());
+                      },
                       child: Text('BUY'),
                     ),
                   ),
@@ -130,7 +186,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               SizedBox(
                 height: 20,
-              )
+              ),
             ],
           ),
         ),

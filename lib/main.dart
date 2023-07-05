@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
 import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
 import 'package:quickshop_ecommerce/screens/home_page.dart';
 import 'package:quickshop_ecommerce/screens/splash.dart';
@@ -20,7 +22,12 @@ void main() async {
       statusBarColor: Colors.white, // Replace with your desired color
     ),
   );
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ProductBloc(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
