@@ -30,21 +30,39 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-              onPressed: () {
-                nextScreen(context, Cart());
-              },
-              icon: Icon(Icons.shopping_cart)),
-          Text(
-            productListInCart.length == 0
-                ? ''
-                : productListInCart.length.toString(),
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Stack(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    nextScreen(context, Cart());
+                  },
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.grey,
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  child: Text(
+                    productListInCart.length == 0
+                        ? ''
+                        : productListInCart.length.toString(),
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 12.0, top: 12.0),
+          //   child:
+          // ),
         ],
       ),
       body: SingleChildScrollView(
@@ -94,7 +112,10 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
-                child: Text(widget.product!.description),
+                child: Text(
+                  widget.product!.description,
+                  style: TextStyle(),
+                ),
               ),
 
               Row(
@@ -112,7 +133,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           // Provider.of<ProductBloc>(context, listen: false)
                           //     .addPrice(widget.product!.price.toInt());
                           Provider.of<ProductBloc>(context, listen: false)
-                              .addProductToCart(widget.product!);
+                              .removeProductFromCart(widget.product!);
                         }
                       },
                     ),
@@ -121,19 +142,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       thisProductList.length.toString(),
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      thisProductList.isEmpty
-                          ? '0'
-                          : {thisProductList.length * thisProductList[0].price}
-                              .toString(),
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -158,6 +166,19 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ],
               ),
+              SizedBox(height: 12.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  thisProductList.isEmpty
+                      ? 'Price: \u{09F3}0'
+                      : 'Price: \u{09F3}${thisProductList.length * thisProductList[0].price}',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               SizedBox(height: 20),
               // Spacer(), If I add this spacer inside a ScrollView then error will occur...
               Row(
@@ -167,7 +188,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     height: 38,
                     width: 140,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        nextScreen(context, Cart());
+                      },
                       child: Text('ADD TO CART'),
                     ),
                   ),

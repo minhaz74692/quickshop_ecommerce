@@ -5,6 +5,7 @@ import 'package:quickshop_ecommerce/firebase_helper/firebase_data.dart';
 import 'package:quickshop_ecommerce/models/categories_model.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
 import 'package:quickshop_ecommerce/screens/Welcome_page.dart';
+import 'package:quickshop_ecommerce/screens/category_view.dart';
 import 'package:quickshop_ecommerce/screens/product_details.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 import 'package:quickshop_ecommerce/utils/products_list.dart';
@@ -156,36 +157,45 @@ class _HomeTabState extends State<HomeTab> {
                           children: categoriesList.map((e) {
                             String imageName = e.name;
                             String imageUrl = e.image;
-                            return Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.all(5),
-                                  height: 80,
-                                  width: 80,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey
-                                            .withOpacity(0.5), // shadow color
-                                        spreadRadius: 2, // spread radius
-                                        blurRadius: 5, // blur radius
-                                        offset: Offset(
-                                            0, 3), // changes position of shadow
+                            return InkWell(
+                              onTap: () {
+                                nextScreen(
+                                    context,
+                                    CategoryView(
+                                      categoryModel: e,
+                                    ));
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.all(5),
+                                    height: 80,
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey
+                                              .withOpacity(0.5), // shadow color
+                                          spreadRadius: 2, // spread radius
+                                          blurRadius: 5, // blur radius
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(40.0),
+                                      color: Colors.white,
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(40),
+                                      child: Image.network(
+                                        imageUrl,
+                                        // fit: BoxFit.cover,
                                       ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(40.0),
-                                    color: Colors.white,
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(40),
-                                    child: Image.network(
-                                      imageUrl,
-                                      // fit: BoxFit.cover,
                                     ),
                                   ),
-                                ),
-                                Text(imageName),
-                              ],
+                                  Text(imageName),
+                                ],
+                              ),
                             );
                           }).toList()),
                     ),

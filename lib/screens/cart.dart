@@ -4,9 +4,50 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-class Cart extends StatelessWidget {
-  const Cart({super.key});
+class Cart extends StatefulWidget {
+  Cart({super.key});
+
+  @override
+  State<Cart> createState() => _CartState();
+}
+
+class _CartState extends State<Cart> {
+  final FirebaseStorage storage = FirebaseStorage.instance;
+
+  String imageUrl = 'evefvuhu';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchAllImageUrls();
+    super.initState();
+    print(imageUrl);
+  }
+
+  Future<List<String>> fetchAllImageUrls() async {
+    try {
+      final ListResult result = await storage.ref().listAll();
+      final List<String> imageUrls = [];
+
+      for (final Reference ref in result.items) {
+        final String downloadUrl = await ref.getDownloadURL();
+        final FullMetadata metadata = await ref.getMetadata();
+        final String? mimeType = metadata.contentType;
+
+        if (mimeType != null && mimeType.startsWith('image/')) {
+          imageUrls.add(downloadUrl);
+        }
+      }
+
+      print(imageUrls);
+      return imageUrls;
+    } catch (e) {
+      print('Failed to fetch data');
+      return [];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +70,7 @@ class Cart extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(productListInCart.length.toString()),
           // Text(totalPrice.toString()),

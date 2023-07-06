@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:quickshop_ecommerce/screens/cart.dart';
 import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens = <Widget>[
     HomeTab(),
     SearchPage(),
-    NotificationsPage(),
+    Cart(),
     ProfilePage(),
   ];
   List<PersistentBottomNavBarItem> _navBarsItems() {

@@ -24,13 +24,29 @@ class _LogInState extends State<LogIn> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
+  void _submitForm() async {
+    // Perform form submission logic here
+    bool valid = loginValidation(email.text, password.text);
+    if (valid) {
+      bool isLogin = await FirebaseAuthHelper.instance
+          .login(email.text, password.text, context);
+      if (isLogin) {
+        nextScreenCloseOthers(context, HomeTab());
+      } else {
+        showMessage('Invalid Email or Password');
+        Navigator.pop(context);
+      }
+    }
+    print('Form submitted!');
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(18.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -57,6 +73,7 @@ class _LogInState extends State<LogIn> {
               TextFormField(
                 controller: email,
                 keyboardType: TextInputType.emailAddress,
+                onEditingComplete: _submitForm,
                 decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.email_outlined,
@@ -67,6 +84,7 @@ class _LogInState extends State<LogIn> {
               TextFormField(
                 controller: password,
                 obscureText: showPassword,
+                onEditingComplete: _submitForm,
                 decoration: InputDecoration(
                     suffixIcon: CupertinoButton(
                       padding: EdgeInsets.all(0),
@@ -89,21 +107,7 @@ class _LogInState extends State<LogIn> {
                     hintText: 'Password'),
               ),
               SizedBox(height: 35),
-              PrimaryButton(
-                  title: 'Log In',
-                  onPressed: () async {
-                    bool valid = loginValidation(email.text, password.text);
-                    if (valid) {
-                      bool isLogin = await FirebaseAuthHelper.instance
-                          .login(email.text, password.text, context);
-                      if (isLogin) {
-                        nextScreenCloseOthers(context, HomeTab());
-                      } else {
-                        showMessage('Invalid Email or Password');
-                        Navigator.pop(context);
-                      }
-                    }
-                  }),
+              PrimaryButton(title: 'Log In', onPressed: _submitForm),
               SizedBox(height: 18),
               Center(child: Text('Do not have an account?')),
               SizedBox(height: 0),
