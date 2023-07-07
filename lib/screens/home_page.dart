@@ -92,7 +92,8 @@ class _HomePageState extends State<HomePage> {
           screens: _buildScreens,
           items: _navBarsItems(),
           confineInSafeArea: true,
-          backgroundColor: Color.fromARGB(255, 230, 233, 238),
+          // backgroundColor: Color.fromARGB(255, 230, 233, 238),
+          backgroundColor: Colors.white,
           // Default is Colors.white.
           handleAndroidBackButtonPress: true, // Default is true.
           resizeToAvoidBottomInset:

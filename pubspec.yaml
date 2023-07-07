@@ -22,6 +22,12 @@ dependencies:
   firebase_storage: ^11.2.3
   fluttertoast: ^8.2.2
   persistent_bottom_nav_bar: ^5.0.2
+  google_sign_in: ^6.1.4
+  flutter_icons:
+    git:
+      url: https://github.com/adarsh-technocrat/flutter-icons
+  url_launcher: ^6.1.11
+  flutter_web_browser: ^0.17.1
 
 dev_dependencies:
   flutter_test:

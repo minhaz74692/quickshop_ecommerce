@@ -2,6 +2,7 @@
 
 import 'package:provider/provider.dart';
 import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
+import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:quickshop_ecommerce/screens/cart.dart';
@@ -117,6 +118,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                   style: TextStyle(),
                 ),
               ),
+              Text(
+                'Unit Price: \u{09F3}${widget.product!.price}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 12),
 
               Row(
                 children: [
@@ -159,26 +165,32 @@ class _ProductDetailsState extends State<ProductDetails> {
                         //     .increment();
                         // Provider.of<ProductBloc>(context, listen: false)
                         //     .addPrice(widget.product!.price.toInt());
-                        Provider.of<ProductBloc>(context, listen: false)
-                            .addProductToCart(widget.product!);
+                        if (thisProductList.length < 5) {
+                          Provider.of<ProductBloc>(context, listen: false)
+                              .addProductToCart(widget.product!);
+                        } else {
+                          showMessage(
+                              'You can not buy a product more then 5 unit at a time.');
+                        }
                       },
+                    ),
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      thisProductList.isEmpty
+                          ? 'Price: \u{09F3}0'
+                          : 'Price: \u{09F3}${thisProductList.length * thisProductList[0].price}',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 12.0),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  thisProductList.isEmpty
-                      ? 'Price: \u{09F3}0'
-                      : 'Price: \u{09F3}${thisProductList.length * thisProductList[0].price}',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+
               SizedBox(height: 20),
               // Spacer(), If I add this spacer inside a ScrollView then error will occur...
               Row(
