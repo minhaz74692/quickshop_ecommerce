@@ -21,8 +21,8 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   bool showPassword = true;
   late IconData lockIcon = Icons.visibility;
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  TextEditingController email = TextEditingController(text: 'admin@gmail.com');
+  TextEditingController password = TextEditingController(text: 'admin1');
 
   void _submitForm() async {
     // Perform form submission logic here
@@ -65,7 +65,7 @@ class _LogInState extends State<LogIn> {
               ),
               TopTitles(
                 title: 'Log In',
-                subTitle: 'Welcome again to the QuickShop App',
+                subTitle: 'Welcome again to the QuickShop',
               ),
               SizedBox(
                 height: 45,

@@ -20,8 +20,6 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
-    int count = Provider.of<ProductBloc>(context).count;
-
     List<ProductsModel> productListInCart =
         Provider.of<ProductBloc>(context).productListOfCart;
     List<ProductsModel> thisProductList = productListInCart
@@ -131,13 +129,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                       icon: Icon(Icons.remove),
                       onPressed: () {
                         if (thisProductList.isNotEmpty) {
-                          // setState(() {
-                          //   prouctCount--;
-                          // });
-                          // Provider.of<ProductBloc>(context, listen: false)
-                          //     .decrement();
-                          // Provider.of<ProductBloc>(context, listen: false)
-                          //     .addPrice(widget.product!.price.toInt());
                           Provider.of<ProductBloc>(context, listen: false)
                               .removeProductFromCart(widget.product!);
                         }
@@ -158,13 +149,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                     child: IconButton(
                       icon: Icon(Icons.add),
                       onPressed: () {
-                        // setState(() {
-                        //   prouctCount++;
-                        // });
-                        // Provider.of<ProductBloc>(context, listen: false)
-                        //     .increment();
-                        // Provider.of<ProductBloc>(context, listen: false)
-                        //     .addPrice(widget.product!.price.toInt());
                         if (thisProductList.length < 5) {
                           Provider.of<ProductBloc>(context, listen: false)
                               .addProductToCart(widget.product!);

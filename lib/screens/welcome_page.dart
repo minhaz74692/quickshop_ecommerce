@@ -25,7 +25,7 @@ class WelcomePage extends StatelessWidget {
             ),
             TopTitles(
               title: 'Welcome',
-              subTitle: 'Buy your groceries from QuickShop',
+              subTitle: 'Buy products from QuickShop',
             ),
             Image.asset(AssetImages.instance.welcomeImgae),
             Row(

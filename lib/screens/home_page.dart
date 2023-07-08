@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens = <Widget>[
     HomeTab(),
     SearchPage(),
-    Cart(),
+    NotificationsPage(),
     ProfilePage(),
   ];
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -125,21 +125,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-// Example pages for the bottom navigation bar
-// class HomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Home'),
-//       ),
-//       body: Center(
-//         child: Text('Home Page'),
-//       ),
-//     );
-//   }
-// }
 
 class SearchPage extends StatelessWidget {
   @override

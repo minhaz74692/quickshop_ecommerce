@@ -51,7 +51,7 @@ class _SignUpState extends State<SignUp> {
               ),
               TopTitles(
                 title: 'Create an account',
-                subTitle: 'Have a good experience with QuickShop ',
+                subTitle: 'Have a good experience with QuickShop',
               ),
               SizedBox(
                 height: 45,
