@@ -5,14 +5,14 @@ import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthHelper {
   static FirebaseAuthHelper instance = FirebaseAuthHelper();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Stream<User?> get getAuthChange => _auth.authStateChanges();
 
-  final GoogleSignIn _googlSignIn = new GoogleSignIn();
+  // final GoogleSignIn _googlSignIn = new GoogleSignIn();
 
   bool _guestUser = false;
   bool get guestUser => _guestUser;
@@ -77,38 +77,38 @@ class FirebaseAuthHelper {
     }
   }
 
-  Future signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await _googlSignIn.signIn();
-    if (googleUser != null) {
-      try {
-        final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
+  // Future signInWithGoogle() async {
+  //   final GoogleSignInAccount? googleUser = await _googlSignIn.signIn();
+  //   if (googleUser != null) {
+  //     try {
+  //       final GoogleSignInAuthentication googleAuth =
+  //           await googleUser.authentication;
 
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
+  //       final AuthCredential credential = GoogleAuthProvider.credential(
+  //         accessToken: googleAuth.accessToken,
+  //         idToken: googleAuth.idToken,
+  //       );
 
-        User userDetails = (await _auth.signInWithCredential(credential)).user!;
+  //       User userDetails = (await _auth.signInWithCredential(credential)).user!;
 
-        this._name = userDetails.displayName;
-        this._email = userDetails.email;
-        this._imageUrl = userDetails.photoURL;
-        this._uid = userDetails.uid;
-        this._signInProvider = 'google';
+  //       this._name = userDetails.displayName;
+  //       this._email = userDetails.email;
+  //       this._imageUrl = userDetails.photoURL;
+  //       this._uid = userDetails.uid;
+  //       this._signInProvider = 'google';
 
-        _hasError = false;
-        // notifyListeners();
-      } catch (e) {
-        _hasError = true;
-        _errorCode = e.toString();
-        // notifyListeners();
-      }
-    } else {
-      _hasError = true;
-      // notifyListeners();
-    }
-  }
+  //       _hasError = false;
+  //       // notifyListeners();
+  //     } catch (e) {
+  //       _hasError = true;
+  //       _errorCode = e.toString();
+  //       // notifyListeners();
+  //     }
+  //   } else {
+  //     _hasError = true;
+  //     // notifyListeners();
+  //   }
+  // }
 
   Future signOut() async {
     await _auth.signOut();

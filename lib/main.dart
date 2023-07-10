@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
 import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
+import 'package:quickshop_ecommerce/screens/checkout.dart';
 import 'package:quickshop_ecommerce/screens/home_page.dart';
 import 'package:quickshop_ecommerce/screens/splash.dart';
 import 'package:quickshop_ecommerce/screens/welcome_page.dart';
