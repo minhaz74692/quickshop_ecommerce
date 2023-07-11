@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:google_sign_in/google_sign_in.dart';
 
-class FirebaseAuthHelper {
-  static FirebaseAuthHelper instance = FirebaseAuthHelper();
+class FirebaseAuthHelper extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Stream<User?> get getAuthChange => _auth.authStateChanges();
 
@@ -55,6 +55,8 @@ class FirebaseAuthHelper {
       showLoaderDialog(context);
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       print('$email: is a subscriber');
+      notifyListeners();
+
       return true;
     } on FirebaseException catch (e) {
       print(e.code.toString());
@@ -70,6 +72,7 @@ class FirebaseAuthHelper {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       print('$email: is a subscriber');
+      notifyListeners();
       return true;
     } on FirebaseException catch (e) {
       print(e.code.toString());
@@ -109,8 +112,16 @@ class FirebaseAuthHelper {
   //     // notifyListeners();
   //   }
   // }
+  Future setSignIn() async {
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setBool('signed_in', true);
+    _isSignedIn = true;
+    notifyListeners();
+  }
 
   Future signOut() async {
     await _auth.signOut();
+    _isSignedIn = false;
+    notifyListeners();
   }
 }

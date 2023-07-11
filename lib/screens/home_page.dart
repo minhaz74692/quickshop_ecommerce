@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quickshop_ecommerce/screens/cart.dart';
 import 'package:quickshop_ecommerce/tabs/home_tab.dart';
+import 'package:quickshop_ecommerce/tabs/profile_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     HomeTab(),
     SearchPage(),
     NotificationsPage(),
-    ProfilePage(),
+    ProfileTab(),
   ];
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
@@ -41,8 +42,8 @@ class _HomePageState extends State<HomePage> {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.shopping_cart),
-        title: ("My Cart"),
+        icon: Icon(CupertinoIcons.heart),
+        title: ("Favourite"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

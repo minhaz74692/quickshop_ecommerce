@@ -50,20 +50,20 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
+    final ub = context.watch<FirebaseAuthHelper>();
+    print(ub.isSignedIn);
     List<ProductsModel> productListInCart =
         Provider.of<ProductBloc>(context).productListOfCart;
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          title: AppName(
+            fontSize: 24,
+          ),
+          actions: [
+            Row(
               children: [
-                AppName(
-                  fontSize: 24,
-                ),
                 Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: Stack(
@@ -93,50 +93,51 @@ class _HomeTabState extends State<HomeTab> {
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Sign Out'),
-                      content: Text('Are you sure to Sign Out?'),
-                      actions: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                // Perform an action when the user taps on the button
-                                Navigator.of(context).pop();
-                              },
-                              child: Text('Cancel'),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Sign Out'),
+                          content: Text('Are you sure to Sign Out?'),
+                          actions: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    // Perform an action when the user taps on the button
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    // Perform an action when the user taps on the button
+                                    await FirebaseAuthHelper().signOut();
+                                    // ignore: use_build_context_synchronously
+                                    nextScreenCloseOthers(
+                                        context, WelcomePage());
+                                  },
+                                  child: Text('Sign Out'),
+                                ),
+                                SizedBox(width: 10),
+                              ],
                             ),
-                            TextButton(
-                              onPressed: () async {
-                                // Perform an action when the user taps on the button
-                                await FirebaseAuthHelper.instance.signOut();
-                                // ignore: use_build_context_synchronously
-                                nextScreenCloseOthers(context, WelcomePage());
-                              },
-                              child: Text('Sign Out'),
-                            ),
-                            SizedBox(width: 10),
                           ],
-                        ),
-                      ],
+                        );
+                      },
                     );
                   },
-                );
-              },
-              icon: Icon(
-                Icons.logout,
-                size: 24,
-              ),
+                  icon: Icon(
+                    Icons.logout,
+                    color: Colors.grey,
+                    size: 24,
+                  ),
+                ),
+                SizedBox(width: 5),
+              ],
             ),
           ],
         ),
@@ -157,17 +158,6 @@ class _HomeTabState extends State<HomeTab> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      height: 40,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Search',
-                          prefixIcon: Icon(Icons.search_outlined),
-                        ),
-                      ),
-                    ),
-                    // SizedBox(height: 8.0),
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Text(
@@ -176,7 +166,6 @@ class _HomeTabState extends State<HomeTab> {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
-
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -196,8 +185,8 @@ class _HomeTabState extends State<HomeTab> {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.all(5),
-                                    height: 80,
-                                    width: 80,
+                                    height: 60,
+                                    width: 60,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -209,11 +198,11 @@ class _HomeTabState extends State<HomeTab> {
                                               3), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.circular(40.0),
+                                      borderRadius: BorderRadius.circular(30.0),
                                       color: Colors.white,
                                     ),
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(40),
+                                      borderRadius: BorderRadius.circular(30),
                                       child: Image.network(
                                         imageUrl,
                                         // fit: BoxFit.cover,
@@ -244,7 +233,7 @@ class _HomeTabState extends State<HomeTab> {
                         crossAxisCount: 2,
                         crossAxisSpacing: 15,
                         mainAxisSpacing: 10,
-                        childAspectRatio: 0.6,
+                        childAspectRatio: 0.65,
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         ProductsModel singleProduct =

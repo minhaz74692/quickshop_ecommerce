@@ -20,14 +20,12 @@ void main() async {
   );
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: Colors.white, // Replace with your desired color
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
     ),
   );
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ProductBloc(),
-      child: MyApp(),
-    ),
+    MyApp(),
   );
 }
 
@@ -36,20 +34,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'E-Commerce App',
-      theme: themeData,
-      home: StreamBuilder(
-        stream: FirebaseAuthHelper.instance.getAuthChange,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            // TODO: return Homepage();
-            return HomePage();
-          } else {
-            return WelcomePage();
-          }
-        },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ProductBloc>(create: (context) => ProductBloc()),
+        ChangeNotifierProvider<FirebaseAuthHelper>(
+            create: (context) => FirebaseAuthHelper()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'E-Commerce App',
+        theme: themeData,
+        home: StreamBuilder(
+          stream: FirebaseAuthHelper().getAuthChange,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              // TODO: return Homepage();
+              return HomePage();
+            } else {
+              return WelcomePage();
+            }
+          },
+        ),
       ),
     );
   }

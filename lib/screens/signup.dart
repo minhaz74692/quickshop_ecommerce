@@ -10,6 +10,7 @@ import 'package:quickshop_ecommerce/widgets/top_titles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -25,6 +26,13 @@ class _SignUpState extends State<SignUp> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController phone = TextEditingController();
+  handleSignUpwithemailPassword() async {
+    final FirebaseAuthHelper sb =
+        Provider.of<FirebaseAuthHelper>(context, listen: false);
+    sb.signUp(email.text, password.text, context).then((value) => sb
+        .setSignIn()
+        .then((value) => nextScreenCloseOthers(context, HomeTab())));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +124,7 @@ class _SignUpState extends State<SignUp> {
                     bool isValid = signUpValidation(
                         email.text, password.text, name.text, phone.text);
                     if (isValid) {
-                      bool isSignUp = await FirebaseAuthHelper.instance
+                      bool isSignUp = await FirebaseAuthHelper()
                           .signUp(email.text, password.text, context);
                       if (isSignUp) {
                         nextScreenCloseOthers(context, HomeTab());

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
+import 'package:provider/provider.dart';
 import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
 import 'package:quickshop_ecommerce/screens/signup.dart';
@@ -24,20 +25,12 @@ class _LogInState extends State<LogIn> {
   TextEditingController email = TextEditingController(text: 'admin@gmail.com');
   TextEditingController password = TextEditingController(text: 'admin1');
 
-  void _submitForm() async {
-    // Perform form submission logic here
-    bool valid = loginValidation(email.text, password.text);
-    if (valid) {
-      bool isLogin = await FirebaseAuthHelper.instance
-          .login(email.text, password.text, context);
-      if (isLogin) {
-        nextScreenCloseOthers(context, HomeTab());
-      } else {
-        showMessage('Invalid Email or Password');
-        Navigator.pop(context);
-      }
-    }
-    print('Form submitted!');
+  handleSignInwithemailPassword() async {
+    final FirebaseAuthHelper sb =
+        Provider.of<FirebaseAuthHelper>(context, listen: false);
+    sb.login(email.text, password.text, context).then((value) => sb
+        .setSignIn()
+        .then((value) => nextScreenCloseOthers(context, HomeTab())));
   }
 
   @override
@@ -73,7 +66,7 @@ class _LogInState extends State<LogIn> {
               TextFormField(
                 controller: email,
                 keyboardType: TextInputType.emailAddress,
-                onEditingComplete: _submitForm,
+                onEditingComplete: handleSignInwithemailPassword,
                 decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.email_outlined,
@@ -84,7 +77,7 @@ class _LogInState extends State<LogIn> {
               TextFormField(
                 controller: password,
                 obscureText: showPassword,
-                onEditingComplete: _submitForm,
+                onEditingComplete: handleSignInwithemailPassword,
                 decoration: InputDecoration(
                     suffixIcon: CupertinoButton(
                       padding: EdgeInsets.all(0),
@@ -107,7 +100,8 @@ class _LogInState extends State<LogIn> {
                     hintText: 'Password'),
               ),
               SizedBox(height: 35),
-              PrimaryButton(title: 'Log In', onPressed: _submitForm),
+              PrimaryButton(
+                  title: 'Log In', onPressed: handleSignInwithemailPassword),
               SizedBox(height: 18),
               Center(child: Text('Do not have an account?')),
               SizedBox(height: 0),

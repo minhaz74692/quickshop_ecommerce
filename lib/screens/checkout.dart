@@ -397,6 +397,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           backgroundColor: Colors.red,
                         ),
                         onPressed: () {
+                          productListInCart.clear();
                           nextScreen(context, OrderConfirmedPage());
                         },
                         child: Text(
