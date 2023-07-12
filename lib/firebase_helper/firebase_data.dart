@@ -1,9 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/models/categories_model.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
-import 'package:quickshop_ecommerce/utils/products_list.dart';
 
 class FirebaseFirestoreHelper {
   static FirebaseFirestoreHelper instance = FirebaseFirestoreHelper();

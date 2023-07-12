@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
+import 'package:quickshop_ecommerce/providers/product_bloc.dart';
 import 'package:quickshop_ecommerce/constants/constants.dart';
-import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
+import 'package:quickshop_ecommerce/providers/auth.dart';
 import 'package:quickshop_ecommerce/firebase_helper/firebase_data.dart';
 import 'package:quickshop_ecommerce/models/categories_model.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
@@ -34,6 +34,11 @@ class _HomeTabState extends State<HomeTab> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   void getCateriesList() async {
     setState(() {
       isLoading = true;
@@ -50,7 +55,7 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    final ub = context.watch<FirebaseAuthHelper>();
+    final ub = context.watch<FirebaseAuthBloc>();
     print(ub.isSignedIn);
     List<ProductsModel> productListInCart =
         Provider.of<ProductBloc>(context).productListOfCart;
@@ -115,7 +120,7 @@ class _HomeTabState extends State<HomeTab> {
                                 TextButton(
                                   onPressed: () async {
                                     // Perform an action when the user taps on the button
-                                    await FirebaseAuthHelper().signOut();
+                                    await FirebaseAuthBloc().signOut();
                                     // ignore: use_build_context_synchronously
                                     nextScreenCloseOthers(
                                         context, WelcomePage());
@@ -146,7 +151,7 @@ class _HomeTabState extends State<HomeTab> {
         backgroundColor: Color.fromARGB(255, 250, 250, 255),
         body: isLoading
             ? Center(
-                child: Container(
+                child: SizedBox(
                   height: 100,
                   width: 100,
                   child: CircularProgressIndicator(),

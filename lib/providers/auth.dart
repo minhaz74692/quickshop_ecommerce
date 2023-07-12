@@ -1,16 +1,14 @@
-// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors, unnecessary_nullable_for_final_variable_declarations, prefer_final_fields
 
-import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:google_sign_in/google_sign_in.dart';
 
-class FirebaseAuthHelper extends ChangeNotifier {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  Stream<User?> get getAuthChange => _auth.authStateChanges();
+class FirebaseAuthBloc extends ChangeNotifier {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  Stream<User?> get getAuthChange => _firebaseAuth.authStateChanges();
 
   // final GoogleSignIn _googlSignIn = new GoogleSignIn();
 
@@ -49,36 +47,51 @@ class FirebaseAuthHelper extends ChangeNotifier {
   String _packageName = '';
   String get packageName => _packageName;
 
-  Future<bool> login(
-      String email, String password, BuildContext context) async {
+  Future signInwithEmailPassword(userEmail, userPassword) async {
     try {
-      showLoaderDialog(context);
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      print('$email: is a subscriber');
-      notifyListeners();
+      final User? user = (await _firebaseAuth.signInWithEmailAndPassword(
+              email: userEmail, password: userPassword))
+          .user!;
+      assert(user != null);
+      await user!.getIdToken();
+      final User currentUser = _firebaseAuth.currentUser!;
+      _uid = currentUser.uid;
+      _signInProvider = 'email';
+      _email = user.email;
 
-      return true;
-    } on FirebaseException catch (e) {
-      print(e.code.toString());
-      return false;
+      _hasError = false;
+      notifyListeners();
+    } catch (e) {
+      _hasError = true;
+      _errorCode = e.toString();
+      notifyListeners();
+    }
+  }
+
+  Future signUpwithEmailPassword(userName, userEmail, userPassword) async {
+    try {
+      final User? user = (await _firebaseAuth.createUserWithEmailAndPassword(
+        email: userEmail,
+        password: userPassword,
+      ))
+          .user!;
+      assert(user != null);
+      await user!.getIdToken();
+      _name = userName;
+      _uid = user.uid;
+      _email = user.email;
+      _signInProvider = 'email';
+
+      _hasError = false;
+      notifyListeners();
+    } catch (e) {
+      _hasError = true;
+      _errorCode = e.toString();
+      notifyListeners();
     }
   }
 
   // Sign-Up Logic with firebase
-  Future<bool> signUp(
-      String email, String password, BuildContext context) async {
-    try {
-      showLoaderDialog(context);
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      print('$email: is a subscriber');
-      notifyListeners();
-      return true;
-    } on FirebaseException catch (e) {
-      print(e.code.toString());
-      return false;
-    }
-  }
 
   // Future signInWithGoogle() async {
   //   final GoogleSignInAccount? googleUser = await _googlSignIn.signIn();
@@ -120,7 +133,7 @@ class FirebaseAuthHelper extends ChangeNotifier {
   }
 
   Future signOut() async {
-    await _auth.signOut();
+    await _firebaseAuth.signOut();
     _isSignedIn = false;
     notifyListeners();
   }

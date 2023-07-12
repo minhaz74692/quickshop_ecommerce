@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:quickshop_ecommerce/firebase_helper/firebase_data.dart';
@@ -52,7 +52,7 @@ class _CategoryViewState extends State<CategoryView> {
         ),
         body: isLoading
             ? Center(
-                child: Container(
+                child: SizedBox(
                   height: 100,
                   width: 100,
                   child: CircularProgressIndicator(),

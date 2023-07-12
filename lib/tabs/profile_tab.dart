@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
+import 'package:quickshop_ecommerce/providers/auth.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -14,14 +14,14 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
-    final ub = context.watch<FirebaseAuthHelper>();
+    final ub = context.watch<FirebaseAuthBloc>();
     return Scaffold(
       body: Center(
           child: ElevatedButton(
         onPressed: () {
           print(ub.isSignedIn);
         },
-        child: Text('Print'),
+        child: Text(ub.email.toString()),
       )),
     );
   }

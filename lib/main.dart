@@ -2,11 +2,10 @@
 
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
-import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
-import 'package:quickshop_ecommerce/screens/checkout.dart';
+import 'package:quickshop_ecommerce/providers/product_bloc.dart';
+import 'package:quickshop_ecommerce/providers/auth.dart';
+import 'package:quickshop_ecommerce/providers/search_bloc.dart';
 import 'package:quickshop_ecommerce/screens/home_page.dart';
-import 'package:quickshop_ecommerce/screens/splash.dart';
 import 'package:quickshop_ecommerce/screens/welcome_page.dart';
 import 'package:quickshop_ecommerce/constants/theme.dart';
 import 'package:flutter/material.dart';
@@ -37,18 +36,18 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ProductBloc>(create: (context) => ProductBloc()),
-        ChangeNotifierProvider<FirebaseAuthHelper>(
-            create: (context) => FirebaseAuthHelper()),
+        ChangeNotifierProvider<FirebaseAuthBloc>(
+            create: (context) => FirebaseAuthBloc()),
+        ChangeNotifierProvider<SearchBloc>(create: (context) => SearchBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'E-Commerce App',
         theme: themeData,
         home: StreamBuilder(
-          stream: FirebaseAuthHelper().getAuthChange,
+          stream: FirebaseAuthBloc().getAuthChange,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              // TODO: return Homepage();
               return HomePage();
             } else {
               return WelcomePage();

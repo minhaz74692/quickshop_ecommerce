@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
+import 'package:quickshop_ecommerce/providers/product_bloc.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
 import 'package:quickshop_ecommerce/screens/order_confiremed.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
@@ -26,8 +26,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductsModel> productListInCart =
-        Provider.of<ProductBloc>(context).productListOfCart;
+    final pb = context.watch<ProductBloc>();
+    List<ProductsModel> productListInCart = pb.productListOfCart;
     double deliveryFee = 40;
     double totalPrice = deliveryFee;
     List<ProductsModel> sortedProductList = productListInCart.toSet().toList();
@@ -326,7 +326,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         ),
                       ],
                     ),
-                    Container(
+                    SizedBox(
                       height: 27 * sortedProductList.length.toDouble(),
                       child: ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
@@ -368,14 +368,14 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       children: [
                         Text('Delivery fee'),
                         Spacer(),
-                        Text('\u{09F3}${deliveryFee}'),
+                        Text('\u{09F3}$deliveryFee'),
                       ],
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 50),
-              Container(
+              SizedBox(
                 child: Column(
                   children: [
                     Row(
@@ -383,7 +383,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         Text('Total'),
                         Text('(incl. VAT)'),
                         Spacer(),
-                        Text('Tk \u{09F3}${totalPrice}')
+                        Text('Tk \u{09F3}$totalPrice')
                       ],
                     ),
                     SizedBox(

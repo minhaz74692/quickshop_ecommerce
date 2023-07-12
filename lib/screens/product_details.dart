@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
+import 'package:quickshop_ecommerce/providers/product_bloc.dart';
 import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +20,8 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
-    List<ProductsModel> productListInCart =
-        Provider.of<ProductBloc>(context).productListOfCart;
+    final pb = context.watch<ProductBloc>();
+    List<ProductsModel> productListInCart = pb.productListOfCart;
     List<ProductsModel> thisProductList = productListInCart
         .where((product) => product.id == widget.product!.id)
         .toList();
@@ -45,7 +45,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Positioned(
                   right: 0,
                   child: Text(
-                    productListInCart.length == 0
+                    productListInCart.isEmpty
                         ? ''
                         : productListInCart.length.toString(),
                     style: TextStyle(
@@ -129,8 +129,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       icon: Icon(Icons.remove),
                       onPressed: () {
                         if (thisProductList.isNotEmpty) {
-                          Provider.of<ProductBloc>(context, listen: false)
-                              .removeProductFromCart(widget.product!);
+                          pb.removeProductFromCart(widget.product!);
                         }
                       },
                     ),
@@ -150,8 +149,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         if (thisProductList.length < 5) {
-                          Provider.of<ProductBloc>(context, listen: false)
-                              .addProductToCart(widget.product!);
+                          pb.addProductToCart(widget.product!);
                         } else {
                           showMessage(
                               'You can not buy a product more then 5 unit at a time.');

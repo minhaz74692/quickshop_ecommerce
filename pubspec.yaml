@@ -29,6 +29,7 @@ dependencies:
   url_launcher: ^6.1.11
   flutter_web_browser: ^0.17.1
   shared_preferences: ^2.2.0
+  skeleton_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

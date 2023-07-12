@@ -1,10 +1,10 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_final_fields, prefer_const_constructors
+// ignore_for_file: library_private_types_in_public_api, prefer_final_fields, prefer_const_constructors, unused_field
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:quickshop_ecommerce/screens/cart.dart';
+import 'package:quickshop_ecommerce/screens/search.dart';
 import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 import 'package:quickshop_ecommerce/tabs/profile_tab.dart';
 
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _buildScreens = <Widget>[
     HomeTab(),
-    SearchPage(),
+    SearchTab(),
     NotificationsPage(),
     ProfileTab(),
   ];
@@ -128,6 +128,8 @@ class _HomePageState extends State<HomePage> {
 }
 
 class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,6 +144,8 @@ class SearchPage extends StatelessWidget {
 }
 
 class NotificationsPage extends StatelessWidget {
+  const NotificationsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,20 +154,6 @@ class NotificationsPage extends StatelessWidget {
       ),
       body: Center(
         child: Text('Notifications Page'),
-      ),
-    );
-  }
-}
-
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      body: Center(
-        child: Text('Profile Page'),
       ),
     );
   }

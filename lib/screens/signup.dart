@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:quickshop_ecommerce/constants/constants.dart';
-import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
+import 'package:quickshop_ecommerce/providers/auth.dart';
 import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 import 'package:quickshop_ecommerce/screens/login.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 import 'package:quickshop_ecommerce/widgets/primary_button.dart';
 import 'package:quickshop_ecommerce/widgets/top_titles.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,11 +26,12 @@ class _SignUpState extends State<SignUp> {
   TextEditingController password = TextEditingController();
   TextEditingController phone = TextEditingController();
   handleSignUpwithemailPassword() async {
-    final FirebaseAuthHelper sb =
-        Provider.of<FirebaseAuthHelper>(context, listen: false);
-    sb.signUp(email.text, password.text, context).then((value) => sb
-        .setSignIn()
-        .then((value) => nextScreenCloseOthers(context, HomeTab())));
+    final FirebaseAuthBloc sb =
+        Provider.of<FirebaseAuthBloc>(context, listen: false);
+    sb.signUpwithEmailPassword(email.text, password.text, context).then(
+        (value) => sb
+            .setSignIn()
+            .then((value) => nextScreenCloseOthers(context, HomeTab())));
   }
 
   @override
@@ -124,8 +124,9 @@ class _SignUpState extends State<SignUp> {
                     bool isValid = signUpValidation(
                         email.text, password.text, name.text, phone.text);
                     if (isValid) {
-                      bool isSignUp = await FirebaseAuthHelper()
-                          .signUp(email.text, password.text, context);
+                      bool isSignUp = await FirebaseAuthBloc()
+                          .signUpwithEmailPassword(
+                              email.text, password.text, context);
                       if (isSignUp) {
                         nextScreenCloseOthers(context, HomeTab());
                       } else {

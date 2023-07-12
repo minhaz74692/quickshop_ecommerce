@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/constants/constants.dart';
-import 'package:quickshop_ecommerce/firebase_helper/auth.dart';
+import 'package:quickshop_ecommerce/providers/auth.dart';
 import 'package:quickshop_ecommerce/screens/signup.dart';
 import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
@@ -10,7 +9,6 @@ import 'package:quickshop_ecommerce/widgets/primary_button.dart';
 import 'package:quickshop_ecommerce/widgets/top_titles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -26,9 +24,9 @@ class _LogInState extends State<LogIn> {
   TextEditingController password = TextEditingController(text: 'admin1');
 
   handleSignInwithemailPassword() async {
-    final FirebaseAuthHelper sb =
-        Provider.of<FirebaseAuthHelper>(context, listen: false);
-    sb.login(email.text, password.text, context).then((value) => sb
+    final FirebaseAuthBloc sb =
+        Provider.of<FirebaseAuthBloc>(context, listen: false);
+    sb.signInwithEmailPassword(email.text, password.text).then((value) => sb
         .setSignIn()
         .then((value) => nextScreenCloseOthers(context, HomeTab())));
   }

@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, library_prefixes
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:quickshop_ecommerce/config/config.dart';
 import 'package:quickshop_ecommerce/utils/toast.dart';

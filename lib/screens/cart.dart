@@ -1,21 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/blocs/product_bloc.dart';
+import 'package:quickshop_ecommerce/providers/product_bloc.dart';
 import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:quickshop_ecommerce/screens/checkout.dart';
-import 'package:quickshop_ecommerce/screens/home_page.dart';
 import 'package:quickshop_ecommerce/screens/product_details.dart';
 import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 
 class Cart extends StatefulWidget {
-  Cart({super.key});
+  const Cart({super.key});
 
   @override
   State<Cart> createState() => _CartState();
@@ -24,14 +21,10 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   final FirebaseStorage storage = FirebaseStorage.instance;
 
-  String imageUrl = 'evefvuhu';
-
   @override
   void initState() {
-    // TODO: implement initState
     fetchAllImageUrls();
     super.initState();
-    print(imageUrl);
   }
 
   Future<List<String>> fetchAllImageUrls() async {
@@ -49,18 +42,16 @@ class _CartState extends State<Cart> {
         }
       }
 
-      print(imageUrls);
       return imageUrls;
     } catch (e) {
-      print('Failed to fetch data');
       return [];
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<ProductsModel> productListInCart =
-        Provider.of<ProductBloc>(context).productListOfCart;
+    final pb = context.watch<ProductBloc>();
+    List<ProductsModel> productListInCart = pb.productListOfCart;
     List<ProductsModel> sortedProductList = productListInCart.toSet().toList();
 
     return Scaffold(
@@ -135,13 +126,13 @@ class _CartState extends State<Cart> {
                             ),
                             Expanded(
                               flex: 2,
-                              child: Container(
+                              child: SizedBox(
                                 height: 140,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 200,
                                       child: Text(
                                         singleProduct.name.length > 28
@@ -160,11 +151,8 @@ class _CartState extends State<Cart> {
                                             icon: Icon(Icons.remove),
                                             onPressed: () {
                                               if (thisProductList.isNotEmpty) {
-                                                Provider.of<ProductBloc>(
-                                                        context,
-                                                        listen: false)
-                                                    .removeProductFromCart(
-                                                        singleProduct);
+                                                pb.removeProductFromCart(
+                                                    singleProduct);
                                               }
                                             },
                                           ),
@@ -184,11 +172,8 @@ class _CartState extends State<Cart> {
                                             icon: Icon(Icons.add),
                                             onPressed: () {
                                               if (thisProductList.length < 5) {
-                                                Provider.of<ProductBloc>(
-                                                        context,
-                                                        listen: false)
-                                                    .addProductToCart(
-                                                        singleProduct);
+                                                pb.addProductToCart(
+                                                    singleProduct);
                                               } else {
                                                 showMessage(
                                                     'You can not buy a product more then 5 unit at a time.');
