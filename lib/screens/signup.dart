@@ -2,7 +2,7 @@
 
 import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/providers/auth.dart';
-import 'package:quickshop_ecommerce/tabs/home_tab.dart';
+import 'package:quickshop_ecommerce/screens/home_page.dart';
 import 'package:quickshop_ecommerce/screens/login.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 import 'package:quickshop_ecommerce/widgets/primary_button.dart';
@@ -28,10 +28,18 @@ class _SignUpState extends State<SignUp> {
   handleSignUpwithemailPassword() async {
     final FirebaseAuthBloc sb =
         Provider.of<FirebaseAuthBloc>(context, listen: false);
-    sb.signUpwithEmailPassword(email.text, password.text, context).then(
-        (value) => sb
-            .setSignIn()
-            .then((value) => nextScreenCloseOthers(context, HomeTab())));
+
+    await sb
+        .signUpwithEmailPassword(name.text, email.text, password.text)
+        .then((_) async {
+      if (sb.hasError == false) {
+        sb.setSignIn().then((value) {
+          nextScreen(context, HomePage());
+        });
+      } else {
+        showMessage(sb.errorCode.toString());
+      }
+    });
   }
 
   @override
@@ -124,15 +132,7 @@ class _SignUpState extends State<SignUp> {
                     bool isValid = signUpValidation(
                         email.text, password.text, name.text, phone.text);
                     if (isValid) {
-                      bool isSignUp = await FirebaseAuthBloc()
-                          .signUpwithEmailPassword(
-                              email.text, password.text, context);
-                      if (isSignUp) {
-                        nextScreenCloseOthers(context, HomeTab());
-                      } else {
-                        showMessage('Email or Password is invalid');
-                        Navigator.pop(context);
-                      }
+                      handleSignUpwithemailPassword();
                     }
                   }),
               SizedBox(height: 18),

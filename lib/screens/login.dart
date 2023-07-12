@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:provider/provider.dart';
+import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/providers/auth.dart';
+import 'package:quickshop_ecommerce/screens/home_page.dart';
 import 'package:quickshop_ecommerce/screens/signup.dart';
-import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 import 'package:quickshop_ecommerce/widgets/primary_button.dart';
 import 'package:quickshop_ecommerce/widgets/top_titles.dart';
@@ -26,9 +27,16 @@ class _LogInState extends State<LogIn> {
   handleSignInwithemailPassword() async {
     final FirebaseAuthBloc sb =
         Provider.of<FirebaseAuthBloc>(context, listen: false);
-    sb.signInwithEmailPassword(email.text, password.text).then((value) => sb
-        .setSignIn()
-        .then((value) => nextScreenCloseOthers(context, HomeTab())));
+
+    await sb.signInwithEmailPassword(email.text, password.text).then((_) async {
+      if (sb.hasError == false) {
+        sb.setSignIn().then((value) {
+          nextScreen(context, HomePage());
+        });
+      } else {
+        showMessage(sb.errorCode.toString());
+      }
+    });
   }
 
   @override

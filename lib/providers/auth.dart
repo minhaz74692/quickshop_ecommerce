@@ -58,7 +58,6 @@ class FirebaseAuthBloc extends ChangeNotifier {
       _uid = currentUser.uid;
       _signInProvider = 'email';
       _email = user.email;
-
       _hasError = false;
       notifyListeners();
     } catch (e) {
