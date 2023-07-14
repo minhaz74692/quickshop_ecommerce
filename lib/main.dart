@@ -1,22 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:quickshop_ecommerce/constants/constants.dart';
 import 'package:quickshop_ecommerce/providers/product_bloc.dart';
 import 'package:quickshop_ecommerce/providers/auth.dart';
 import 'package:quickshop_ecommerce/providers/search_bloc.dart';
 import 'package:quickshop_ecommerce/screens/home_page.dart';
-import 'package:quickshop_ecommerce/screens/splash.dart';
 import 'package:quickshop_ecommerce/constants/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:quickshop_ecommerce/screens/welcome_page.dart';
+import 'package:quickshop_ecommerce/screens/splash.dart';
 import 'firebase_options.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:hive/hive.dart';
+// import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +56,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return HomePage();
             } else {
-              return WelcomePage();
+              return SplashPage();
             }
           },
         ),

@@ -33,12 +33,18 @@ dependencies:
   path_provider: ^2.0.15
   hive: ^2.2.3
   flutter_svg: ^1.1.6
+  flutter_launcher_icons: ^0.9.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+flutter_icons: 
+  android: true
+  ios: true
+  web: true
+  image_path: "assets/images/logo.png"
 
 flutter:
   uses-material-design: true
