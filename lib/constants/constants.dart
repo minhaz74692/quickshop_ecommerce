@@ -1,7 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_declarations
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+class Constants {
+  static final bookmarkTag = 'bookmarkTag';
+}
 
 void showMessage(String message) {
   Fluttertoast.showToast(

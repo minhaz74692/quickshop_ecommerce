@@ -20,9 +20,14 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
+    // final bookmarkedList = Hive.box(Constants.bookmarkTag);
     final pb = context.watch<ProductBloc>();
+    List<ProductsModel> bookmarkedProductList = pb.bookmarkedProductList;
     List<ProductsModel> productListInCart = pb.productListOfCart;
     List<ProductsModel> thisProductList = productListInCart
+        .where((product) => product.id == widget.product!.id)
+        .toList();
+    List<ProductsModel> thisProductInBookmark = bookmarkedProductList
         .where((product) => product.id == widget.product!.id)
         .toList();
 
@@ -92,15 +97,28 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ),
                   SizedBox(width: 15),
+                  // BookmarkIcon(
+                  //   bookmarkedList: bookmarkedList,
+                  //   iconSize: 24.0,
+                  //   product: widget.product,
+                  // )
                   IconButton(
                     onPressed: () {
-                      setState(() {
-                        widget.product!.isfavourite =
-                            !widget.product!.isfavourite;
-                      });
+                      // setState(() {
+                      //   widget.product!.isfavourite =
+                      //       !widget.product!.isfavourite;
+                      //   ProductBloc().addProductToBookmark(widget.product!);
+                      // });
+                      if (thisProductInBookmark.isEmpty) {
+                        pb.addProductToBookmark(widget.product!);
+                        showMessage('Added in bookmark');
+                      } else {
+                        pb.removeProductFromBookmark(widget.product!);
+                        showMessage('Removed from bookmark');
+                      }
                     },
                     icon: Icon(
-                      widget.product!.isfavourite
+                      thisProductInBookmark.isNotEmpty
                           ? Icons.favorite
                           : Icons.favorite_border,
                       size: 24.0,

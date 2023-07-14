@@ -1,14 +1,12 @@
-// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, avoid_print
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:quickshop_ecommerce/providers/search_bloc.dart';
-import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 import 'package:quickshop_ecommerce/utils/empty_page.dart';
 import 'package:quickshop_ecommerce/utils/loading_cards.dart';
-import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 
 class SearchTab extends StatefulWidget {
   const SearchTab({super.key});

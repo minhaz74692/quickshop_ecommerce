@@ -16,7 +16,10 @@ class Config {
   static const String githubUrl = 'https://github.com/minhaz74692';
 
   //app theme color
+
   final Color appColor = Colors.deepPurpleAccent;
+
+  static const String bookmarkImage = "assets/images/bookmark.svg";
 
   //Intro images
   final String introImage1 = 'assets/images/news1.png';

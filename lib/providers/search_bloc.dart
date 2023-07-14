@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, no_leading_underscores_for_local_identifiers
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quickshop_ecommerce/models/products_model.dart';

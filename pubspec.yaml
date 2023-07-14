@@ -30,6 +30,9 @@ dependencies:
   flutter_web_browser: ^0.17.1
   shared_preferences: ^2.2.0
   skeleton_text: ^3.0.0
+  path_provider: ^2.0.15
+  hive: ^2.2.3
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:

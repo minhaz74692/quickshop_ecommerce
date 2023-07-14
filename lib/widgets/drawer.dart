@@ -2,18 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:provider/provider.dart';
 // import 'package:quickshop_ecommerce/blocs/sign_in_bloc.dart';
 // import 'package:quickshop_ecommerce/blocs/theme_bloc.dart';
 import 'package:quickshop_ecommerce/config/config.dart';
-import 'package:quickshop_ecommerce/providers/auth.dart';
 import 'package:quickshop_ecommerce/services/app_service.dart';
-import 'package:quickshop_ecommerce/tabs/profile_tab.dart';
 // import 'package:quickshop_ecommerce/models/custom_color.dart';
 // import 'package:quickshop_ecommerce/pages/bookmarks.dart';
 // import 'package:quickshop_ecommerce/services/app_service.dart';
 import 'package:quickshop_ecommerce/utils/app_name.dart';
-import 'package:quickshop_ecommerce/utils/nextscreen.dart';
 // import 'package:quickshop_ecommerce/widgets/language.dart';
 // import 'package:easy_localization/easy_localization.dart';
 
@@ -33,7 +29,6 @@ class DrawerMenu extends StatelessWidget {
       'linkedin',
       'github',
       'twitter',
-      'settings',
     ];
 
     final List icons = [
@@ -46,9 +41,7 @@ class DrawerMenu extends StatelessWidget {
       Feather.linkedin,
       Feather.github,
       Feather.twitter,
-      Feather.settings,
     ];
-    final ub = context.watch<FirebaseAuthBloc>();
     return Drawer(
       child: SingleChildScrollView(
         child: Column(
@@ -122,12 +115,6 @@ class DrawerMenu extends StatelessWidget {
                         AppService().openLink(context, Config.githubUrl);
                       } else if (index == 8) {
                         AppService().openLink(context, Config.twitterUrl);
-                      } else if (index == 9) {
-                        print(ub.email);
-                        nextScreen(
-                          context,
-                          ProfileTab(),
-                        );
                       }
                     },
                   );

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:quickshop_ecommerce/screens/search.dart';
+import 'package:quickshop_ecommerce/tabs/bookmark_tab.dart';
 import 'package:quickshop_ecommerce/tabs/home_tab.dart';
 import 'package:quickshop_ecommerce/tabs/profile_tab.dart';
 
@@ -24,37 +25,9 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens = <Widget>[
     HomeTab(),
     SearchTab(),
-    NotificationsPage(),
+    BookMarkTab(),
     ProfileTab(),
   ];
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
-        title: ("Home"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.search),
-        title: ("Search"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.heart),
-        title: ("Favourite"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.settings),
-        title: ("Settings"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-    ];
-  }
 
   int selectedIndex = 0;
   PageController? _pageController;
@@ -67,6 +40,14 @@ class _HomePageState extends State<HomePage> {
       await SystemChannels.platform
           .invokeMethod<void>('SystemNavigator.pop', true);
     }
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    _pageController?.animateToPage(index,
+        curve: Curves.easeIn, duration: Duration(milliseconds: 250));
   }
 
   @override
@@ -125,36 +106,33 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Search'),
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.home),
+        title: ("Home"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
-      body: Center(
-        child: Text('Search Page'),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.search),
+        title: ("Search"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
-    );
-  }
-}
-
-class NotificationsPage extends StatelessWidget {
-  const NotificationsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Notifications'),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.heart),
+        title: ("Favourite"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
-      body: Center(
-        child: Text('Notifications Page'),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.settings),
+        title: ("Settings"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
-    );
+    ];
   }
 }

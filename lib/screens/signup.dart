@@ -28,7 +28,7 @@ class _SignUpState extends State<SignUp> {
   handleSignUpwithemailPassword() async {
     final FirebaseAuthBloc sb =
         Provider.of<FirebaseAuthBloc>(context, listen: false);
-
+    showLoaderDialog(context);
     await sb
         .signUpwithEmailPassword(name.text, email.text, password.text)
         .then((_) async {
@@ -47,21 +47,12 @@ class _SignUpState extends State<SignUp> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(),
         body: Padding(
           padding: const EdgeInsets.all(18.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.arrow_back,
-                  size: 25,
-                  color: Colors.black,
-                ),
-              ),
               SizedBox(
                 height: 10,
               ),

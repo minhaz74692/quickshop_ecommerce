@@ -6,8 +6,25 @@ class ProductBloc extends ChangeNotifier {
   int price = 0;
   List<ProductsModel> productListOfCart = [];
 
+  List<ProductsModel> bookmarkedProductList = [];
+
   void addProductToCart(ProductsModel x) {
     productListOfCart.add(x);
+    notifyListeners();
+  }
+
+  void addProductToBookmark(ProductsModel x) {
+    bookmarkedProductList.add(x);
+    notifyListeners();
+  }
+
+  void removeProductFromBookmark(ProductsModel x) {
+    bookmarkedProductList.remove(x);
+    notifyListeners();
+  }
+
+  void clearProductFromBookmark() {
+    bookmarkedProductList.clear();
     notifyListeners();
   }
 
