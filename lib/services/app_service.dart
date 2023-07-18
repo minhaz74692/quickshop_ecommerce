@@ -5,15 +5,21 @@ import 'package:quickshop_ecommerce/config/config.dart';
 import 'package:quickshop_ecommerce/utils/toast.dart';
 import 'package:url_launcher/url_launcher.dart' as urlLauncher;
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AppService {
   Future openLink(context, String url) async {
     final uri = Uri.parse(url);
-    if (await urlLauncher.canLaunchUrl(uri)) {
-      urlLauncher.launchUrl(uri);
-    } else {
+    try {
+      urlLauncher.launchUrl(uri, mode: LaunchMode.externalApplication);
+    } catch (e) {
       openToast1(context, "Can't launch the url");
     }
+    // if (await urlLauncher.canLaunchUrl(uri)) {
+    //   urlLauncher.launchUrl(uri, mode: LaunchMode.externalApplication);
+    // } else {
+    //   openToast1(context, "Can't launch the url");
+    // }
   }
 
   Future openEmailSupport(context) async {
@@ -23,12 +29,17 @@ class AppService {
       query:
           'subject=About ${Config().appName}&body=', //add subject and body here
     );
-
-    if (await urlLauncher.canLaunchUrl(uri)) {
-      await urlLauncher.launchUrl(uri);
-    } else {
-      openToast1(context, "Can't open the email app");
+    try {
+      urlLauncher.launchUrl(uri, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      openToast1(context, "Can't launch the url");
     }
+
+    // if (await urlLauncher.canLaunchUrl(uri)) {
+    //   await urlLauncher.launchUrl(uri,mode: LaunchMode.externalApplication);
+    // } else {
+    //   openToast1(context, "Can't open the email app");
+    // }
   }
 
   Future openLinkWithCustomTab(BuildContext context, String url) async {
