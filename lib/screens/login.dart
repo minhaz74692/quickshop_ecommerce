@@ -41,81 +41,79 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              TopTitles(
-                title: 'Log In',
-                subTitle: 'Welcome again to the QuickShop',
-              ),
-              SizedBox(
-                height: 45,
-              ),
-              TextFormField(
-                controller: email,
-                keyboardType: TextInputType.emailAddress,
-                onEditingComplete: handleSignInwithemailPassword,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.email_outlined,
-                    ),
-                    hintText: 'E-mail'),
-              ),
-              SizedBox(height: 15),
-              TextFormField(
-                controller: password,
-                obscureText: showPassword,
-                onEditingComplete: handleSignInwithemailPassword,
-                decoration: InputDecoration(
-                    suffixIcon: CupertinoButton(
-                      padding: EdgeInsets.all(0),
-                      onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                          lockIcon = lockIcon == Icons.visibility
-                              ? Icons.visibility_off
-                              : Icons.visibility;
-                        });
-                      },
-                      child: Icon(
-                        lockIcon,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.lock_open_outlined,
-                    ),
-                    hintText: 'Password'),
-              ),
-              SizedBox(height: 35),
-              PrimaryButton(
-                  title: 'Log In', onPressed: handleSignInwithemailPassword),
-              SizedBox(height: 18),
-              Center(child: Text('Do not have an account?')),
-              SizedBox(height: 0),
-              Center(
-                child: CupertinoButton(
-                  padding: EdgeInsets.all(0),
-                  onPressed: () {
-                    nextScreen(context, SignUp());
-                  },
-                  child: Text(
-                    'create account',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            TopTitles(
+              title: 'Log In',
+              subTitle: 'Welcome again to the QuickShop',
+            ),
+            SizedBox(
+              height: 45,
+            ),
+            TextFormField(
+              controller: email,
+              keyboardType: TextInputType.emailAddress,
+              onEditingComplete: handleSignInwithemailPassword,
+              decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.email_outlined,
                   ),
+                  hintText: 'E-mail'),
+            ),
+            SizedBox(height: 15),
+            TextFormField(
+              controller: password,
+              obscureText: showPassword,
+              onEditingComplete: handleSignInwithemailPassword,
+              decoration: InputDecoration(
+                  suffixIcon: CupertinoButton(
+                    padding: EdgeInsets.all(0),
+                    onPressed: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                        lockIcon = lockIcon == Icons.visibility
+                            ? Icons.visibility_off
+                            : Icons.visibility;
+                      });
+                    },
+                    child: Icon(
+                      lockIcon,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.lock_open_outlined,
+                  ),
+                  hintText: 'Password'),
+            ),
+            SizedBox(height: 35),
+            PrimaryButton(
+                title: 'Log In', onPressed: handleSignInwithemailPassword),
+            SizedBox(height: 18),
+            Center(child: Text('Do not have an account?')),
+            SizedBox(height: 0),
+            Center(
+              child: CupertinoButton(
+                padding: EdgeInsets.all(0),
+                onPressed: () {
+                  nextScreen(context, SignUp());
+                },
+                child: Text(
+                  'create account',
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

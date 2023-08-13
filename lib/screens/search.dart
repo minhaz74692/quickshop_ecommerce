@@ -27,6 +27,7 @@ class _SearchTabState extends State<SearchTab> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           // leading: BackButton(
           //   onPressed: () {

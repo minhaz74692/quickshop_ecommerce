@@ -44,105 +44,103 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              TopTitles(
-                title: 'Create an account',
-                subTitle: 'Have a good experience with QuickShop',
-              ),
-              SizedBox(
-                height: 45,
-              ),
-              TextFormField(
-                controller: name,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.person_outline,
-                    ),
-                    hintText: 'Full Name'),
-              ),
-              SizedBox(height: 15),
-              TextFormField(
-                controller: email,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.email_outlined,
-                    ),
-                    hintText: 'E-mail'),
-              ),
-              SizedBox(height: 15),
-              TextFormField(
-                controller: phone,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.phone_outlined,
-                    ),
-                    hintText: 'Phone Number'),
-              ),
-              SizedBox(height: 15),
-              TextFormField(
-                controller: password,
-                obscureText: showPassword,
-                decoration: InputDecoration(
-                    suffixIcon: CupertinoButton(
-                      padding: EdgeInsets.all(0),
-                      onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                          lockIcon = lockIcon == Icons.visibility
-                              ? Icons.visibility_off
-                              : Icons.visibility;
-                        });
-                      },
-                      child: Icon(
-                        lockIcon,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.lock_open_outlined,
-                    ),
-                    hintText: 'Password'),
-              ),
-              SizedBox(height: 35),
-              PrimaryButton(
-                  title: 'Sign Up',
-                  onPressed: () async {
-                    bool isValid = signUpValidation(
-                        email.text, password.text, name.text, phone.text);
-                    if (isValid) {
-                      handleSignUpwithemailPassword();
-                    }
-                  }),
-              SizedBox(height: 18),
-              Center(child: Text('I have already an account?')),
-              SizedBox(height: 0),
-              Center(
-                child: CupertinoButton(
-                  padding: EdgeInsets.all(0),
-                  onPressed: () {
-                    nextScreen(context, LogIn());
-                  },
-                  child: Text(
-                    'Log In',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            TopTitles(
+              title: 'Create an account',
+              subTitle: 'Have a good experience with QuickShop',
+            ),
+            SizedBox(
+              height: 45,
+            ),
+            TextFormField(
+              controller: name,
+              decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.person_outline,
                   ),
+                  hintText: 'Full Name'),
+            ),
+            SizedBox(height: 15),
+            TextFormField(
+              controller: email,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.email_outlined,
+                  ),
+                  hintText: 'E-mail'),
+            ),
+            SizedBox(height: 15),
+            TextFormField(
+              controller: phone,
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.phone_outlined,
+                  ),
+                  hintText: 'Phone Number'),
+            ),
+            SizedBox(height: 15),
+            TextFormField(
+              controller: password,
+              obscureText: showPassword,
+              decoration: InputDecoration(
+                  suffixIcon: CupertinoButton(
+                    padding: EdgeInsets.all(0),
+                    onPressed: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                        lockIcon = lockIcon == Icons.visibility
+                            ? Icons.visibility_off
+                            : Icons.visibility;
+                      });
+                    },
+                    child: Icon(
+                      lockIcon,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.lock_open_outlined,
+                  ),
+                  hintText: 'Password'),
+            ),
+            SizedBox(height: 35),
+            PrimaryButton(
+                title: 'Sign Up',
+                onPressed: () async {
+                  bool isValid = signUpValidation(
+                      email.text, password.text, name.text, phone.text);
+                  if (isValid) {
+                    handleSignUpwithemailPassword();
+                  }
+                }),
+            SizedBox(height: 18),
+            Center(child: Text('I have already an account?')),
+            SizedBox(height: 0),
+            Center(
+              child: CupertinoButton(
+                padding: EdgeInsets.all(0),
+                onPressed: () {
+                  nextScreen(context, LogIn());
+                },
+                child: Text(
+                  'Log In',
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
